@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نظام إدارة الخزانات</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div class="max-w-lg mx-auto px-4 py-8">
+      <header class="mb-8">
+        <h1 class="text-3xl font-bold text-center text-blue-800 mb-2">نظام إدارة الخزانات</h1>
+        <p class="text-center text-slate-500 text-sm mb-6">مراقبة وإدارة مستويات المواد الكيميائية</p>
+        <div class="bg-white rounded-2xl shadow-lg mb-5 overflow-hidden p-3">
+          <div class="chemical-grid grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div class="chemical-btn bg-gradient-to-br from-red-500 to-red-700 text-white" onclick="displayChemicalTanks('H2SO4_INTAKE')">H₂SO₄</div>
+            <div class="chemical-btn bg-gradient-to-br from-amber-500 to-amber-700 text-white" onclick="displayChemicalTanks('FECL3')">FeCl₃</div>
+            <div class="chemical-btn bg-gradient-to-br from-orange-500 to-orange-700 text-white" onclick="displayChemicalTanks('H2SO4_MAIN')">H₂SO₄</div>
+            <div class="chemical-btn bg-gradient-to-br from-blue-500 to-blue-700 text-white" onclick="displayChemicalTanks('NAOH')">NaOH</div>
+            <div class="chemical-btn bg-gradient-to-br from-green-500 to-green-700 text-white" onclick="displayChemicalTanks('SMBS')">SMBS</div>
+            <div class="chemical-btn bg-gradient-to-br from-teal-500 to-teal-700 text-white" onclick="displayChemicalTanks('NACLO2')">NaClO₂</div>
+            <div class="chemical-btn bg-gradient-to-br from-purple-500 to-purple-700 text-white" onclick="displayChemicalTanks('HCL')">HCl</div>
+            <div class="chemical-btn bg-gradient-to-br from-slate-600 to-slate-800 text-white" onclick="displayChemicalTanks('CO2')">CO₂</div>
+          </div>
+        </div>
+      </header>
+      <div id="tankDisplayArea" class="bg-white rounded-2xl p-5 shadow-lg mb-6 min-h-[350px] flex justify-center items-center text-slate-400">
+        <p class="text-lg">اضغط على أيقونة مادة كيميائية لعرض الخزانات</p>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
