@@ -5,9 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>نظام إدارة الخزانات</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    .chemical-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 70px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .chemical-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    .tank {
+      position: relative;
+      width: 100%;
+      height: 140px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      margin-bottom: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    }
+    .tank-fill {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      transition: height 0.8s ease-in-out;
+      background-image: linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(0,0,0,0.1));
+    }
+    .tank-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+      font-weight: bold;
+      z-index: 10;
+      font-size: 1.25rem;
+    }
+  </style>
 </head>
-<body>
+<body class="bg-gray-100">
   <div id="app">
     <div class="max-w-lg mx-auto px-4 py-8">
       <header class="mb-8">
@@ -31,6 +77,33 @@
       </div>
     </div>
   </div>
-  <script src="script.js"></script>
+
+  <script>
+    const chemicals = {
+      H2SO4_INTAKE: { name: "حمض الكبريتيك (مدخل)", color: "red", tanks: [25, 30] },
+      FECL3: { name: "كلوريد الحديديك", color: "amber", tanks: [40, 35] },
+      H2SO4_MAIN: { name: "حمض الكبريتيك (رئيسي)", color: "orange", tanks: [50, 50] },
+      NAOH: { name: "هيدروكسيد الصوديوم", color: "blue", tanks: [20, 25] },
+      SMBS: { name: "ميتابيسلفيت الصوديوم", color: "green", tanks: [30, 30] },
+      NACLO2: { name: "كلوريت الصوديوم", color: "teal", tanks: [15, 20] },
+      HCL: { name: "حمض الهيدروكلوريك", color: "purple", tanks: [10, 15] },
+      CO2: { name: "ثاني أكسيد الكربون", color: "slate", tanks: [5, 8] },
+    };
+
+    function displayChemicalTanks(key) {
+      const chem = chemicals[key];
+      if (!chem) return;
+      const container = document.getElementById("tankDisplayArea");
+      container.innerHTML = `
+        <h2 class="text-xl font-bold text-${chem.color}-700 mb-4 text-center">${chem.name}</h2>
+        ${chem.tanks.map((level) => `
+          <div class="tank bg-${chem.color}-500">
+            <div class="tank-fill" style="height: ${level}%; background-color: rgba(0,0,0,0.1);"></div>
+            <div class="tank-label">${level}%</div>
+          </div>
+        `).join('')}
+      `;
+    }
+  </script>
 </body>
 </html>
